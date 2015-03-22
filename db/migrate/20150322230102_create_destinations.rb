@@ -3,9 +3,10 @@ class CreateDestinations < ActiveRecord::Migration
     create_table :destinations do |t|
       t.string :name
       t.text :description
-      t.text :city
-      t.text :state
-      t.text :country
+      t.string :city
+      t.string :state
+      t.string :country
+      t.boolean :visited
 
       t.timestamps null: false
     end

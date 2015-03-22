@@ -1,5 +1,5 @@
 class Destination < ActiveRecord::Base
-	attr_accessible :description, :name, :city, :state, :country
+	attr_accessor :name, :description, :city, :state, :country
 
 	belongs_to :trip
 end
