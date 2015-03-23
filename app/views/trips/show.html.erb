@@ -15,7 +15,28 @@
   <%= @trip.date %>
 </p>
 
-<button type="button" class="btn btn-default btn-lg"><%= link_to 'Add Destination', create_trip_destination_path(@trip)%></button>
+<table class="table table-hover">
+  <tr>
+	<th>Destination</th>
+	<th>Description</th>
+	<th>Date</th>
+  </tr>
+  
+  <% @trip.destinations.each do |destination| %>
+	<tr>
+      <td><%= link_to destination.name, edit_trip_destination_path(@trip, destination) %></td>
+      <td><%= destination.description %></td>
+      <td><%= destination.city %></td>
+      <td><%= destination.state %></td>
+      <td><%= destination.country %></td>
+	</tr>
+  <% end %>
+</table>
+
+
+
+
+<button type="button" class="btn btn-default btn-lg"><%= link_to 'Add Destination', new_trip_destination_path(@trip)%></button>
 
 <%= link_to 'Edit Trip', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>
