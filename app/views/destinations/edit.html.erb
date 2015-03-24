@@ -3,4 +3,5 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', trip_destination_path(@trip, @destination) %> |
+<%= link_to 'Destroy', trip_destination_path(@trip, @destination), method: :delete, data: { confirm: 'Are you sure?' } %> | 
 <%= link_to 'Back', trip_path(@trip) %>

@@ -15,7 +15,7 @@ class DestinationsController < ApplicationController
   # GET /destinations/1
   # GET /destinations/1.json
   def show
-    @trip = Trip.find(params[:id])
+    @trip = Trip.find(params[:trip_id])
     @destination = Destination.find(params[:id])
     
     respond_to do |format|

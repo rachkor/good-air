@@ -25,6 +25,14 @@
   <%= @destination.country %>
 </p>
 
+<p>
+  <strong>Visited?</strong>
+  <% if @destination.visited = false %>
+    Not yet!
+  <% elsif @destination.visited = true %>
+    Visited <%= @destination.trip.date %>
+  <% end %>
+</p>
 
 <%= link_to 'Edit', edit_trip_destination_path(@trip, @destination) %> |
 <%= link_to 'Back', trip_path(@trip) %>
