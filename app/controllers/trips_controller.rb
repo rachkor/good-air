@@ -73,7 +73,7 @@ class TripsController < ApplicationController
   # DELETE /trips/1
   # DELETE /trips/1.json
   def destroy
-    @teip = Trip.find(params[:id])
+    @trip = Trip.find(params[:id])
     @trip.destroy
 
     respond_to do |format|

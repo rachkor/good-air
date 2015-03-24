@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :destinations, only: :index
+  resources :destinations
 
   resources :trips do
     resources :destinations
