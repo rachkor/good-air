@@ -14,6 +14,7 @@
   <strong>Date:</strong>
   <%= @trip.date %>
 </p>
+<p><%= link_to 'Edit Trip', edit_trip_path(@trip) %> | <%= link_to 'Back', trips_path %></p>
 
 <table class="table table-hover">
   <tr>
@@ -25,7 +26,7 @@
   <th>Visited</th>
   <th></th>
   </tr>
-  
+
   <% @trip.destinations.each do |destination| %>
 	<tr>
       <td><%= destination.name %></td>
@@ -38,6 +39,7 @@
       <% elsif destination.visited = true %>
         Visited 
       <% end %>
+      <td><%= link_to "show", trip_destination_path(destination.trip, destination) %></td>
       <td><%= link_to "edit", edit_trip_destination_path(destination.trip, destination) %></td>
 	</tr>
   <% end %>
@@ -45,5 +47,4 @@
 
 <button type="button" class="btn btn-default btn-block"><%= link_to 'Add Destination', new_trip_destination_path(@trip)%></button>
 <br>
-<%= link_to 'Edit Trip', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+
