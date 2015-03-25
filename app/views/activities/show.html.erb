@@ -26,4 +26,4 @@
 </p>
 
 <%= link_to 'Edit', edit_destination_activity_path(@activity.destination_id, @activity) %> |
-<%= link_to 'Back', activities_path %>
+<%= link_to 'Back', trip_destination_path(@activity.destination.trip_id, @activity.destination_id) %>
