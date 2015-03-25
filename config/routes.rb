@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  resources :destinations
+  resources :activities
+
+  resources :destinations, only: :index do
+    resources :activities
+  end
 
   resources :trips do
-    resources :destinations
+    resources :destinations 
   end
   
   root to: 'trips#index'
