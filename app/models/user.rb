@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   
   has_many :trips
+  has_many :destinations, through: :trips
 end
