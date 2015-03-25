@@ -21,13 +21,12 @@
       <tr>
         <td><%= activity.name %></td>
         <td><%= link_to 'Destination', destinations_path %></td>
-        <td><%= %></td>
         <td><%= activity.description %></td>
         <td><%= activity.location %></td>
         <td><%= activity.cost %></td>
         <td><%= activity.date %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
+        <td><%= link_to 'Show', destination_activity_path(activity.destination_id, activity) %></td>
+        <td><%= link_to 'Edit', edit_destination_activity_path(activity.destination_id, activity) %></td>
         <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -35,3 +34,5 @@
 </table>
 
 <br>
+
+<button type="button" class="btn btn-default btn-block"><%= link_to 'Add Activity', destinations_path %></button>

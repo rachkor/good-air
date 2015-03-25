@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :activities
 
-  resources :destinations, only: :index do
+  resources :destinations do
     resources :activities
   end
 

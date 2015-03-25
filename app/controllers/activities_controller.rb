@@ -45,12 +45,12 @@ class ActivitiesController < ApplicationController
   # POST /activities.json
   def create
     @destination = Destination.find(params[:destination_id])
-    @activity = Activity.new(activity_params)
+    @activity = @destination.activities.new(activity_params)
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
-        format.json { render :show, status: :created, location: @activity }
+        format.html { redirect_to destination_activity_path(@destination, @activity), notice: 'Activity was successfully created.' }
+        format.json { render json: @activity, status: :created, location: @activity }
       else
         format.html { render :new }
         format.json { render json: @activity.errors, status: :unprocessable_entity }
@@ -66,7 +66,7 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       if @activity.update(activity_params)
-        format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
+        format.html { redirect_to destination_activity_path(@activity.destination, @activity), notice: 'Activity was successfully updated.' }
         format.json { render :show, status: :ok, location: @activity }
       else
         format.html { render :edit }
@@ -80,7 +80,7 @@ class ActivitiesController < ApplicationController
   def destroy
     @activity = Activity.find(params[:id])
     @activity.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to activities_url, notice: 'Activity was successfully destroyed.' }
       format.json { head :no_content }
