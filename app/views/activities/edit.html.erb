@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @activity %> |
+<%= link_to 'Delete Activity', destination_activity_path(@destination, @activity), method: :delete, data: { confirm: 'Are you sure?' } %>|
 <%= link_to 'Back', activities_path %>

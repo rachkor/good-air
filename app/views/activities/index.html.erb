@@ -2,10 +2,12 @@
 
 <h1>Listing Activities</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
+      <th>Trip</th>
+      <th>Destination<th>
       <th>Description</th>
       <th>Location</th>
       <th>Cost</th>
@@ -18,6 +20,8 @@
     <% @activities.each do |activity| %>
       <tr>
         <td><%= activity.name %></td>
+        <td><%= link_to 'Destination', destinations_path %></td>
+        <td><%= %></td>
         <td><%= activity.description %></td>
         <td><%= activity.location %></td>
         <td><%= activity.cost %></td>
@@ -31,5 +35,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Activity', new_activity_path %>

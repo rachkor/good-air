@@ -5,25 +5,46 @@ class ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     @activities = Activity.all
+
+    respond_to do |format|
+      format.html #index.html.erb
+      format.json { render json: @activities}
+    end
   end
 
   # GET /activities/1
   # GET /activities/1.json
   def show
+    @destination = Destination.find(params[:destination_id])
+    @activity = Activity.find(params[:id])
+
+    respond_to do |format|
+      format.html #show.html.erb
+      format.json { render json: @activity}
+    end
   end
 
   # GET /activities/new
   def new
+    @destination = Destination.find(params[:destination_id])
     @activity = Activity.new
+
+    respond_to do |format|
+      format.html #show.html.erb
+      format.json { render json: @activity}
+    end
   end
 
   # GET /activities/1/edit
   def edit
+    @destination = Destination.find(params[:destination_id])
+    @activity = Activity.find(params[:id])
   end
 
   # POST /activities
   # POST /activities.json
   def create
+    @destination = Destination.find(params[:destination_id])
     @activity = Activity.new(activity_params)
 
     respond_to do |format|
@@ -40,6 +61,9 @@ class ActivitiesController < ApplicationController
   # PATCH/PUT /activities/1
   # PATCH/PUT /activities/1.json
   def update
+    @activity = Activity.find(params[:id])
+    @destination = @activity.destination
+
     respond_to do |format|
       if @activity.update(activity_params)
         format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
@@ -54,7 +78,9 @@ class ActivitiesController < ApplicationController
   # DELETE /activities/1
   # DELETE /activities/1.json
   def destroy
+    @activity = Activity.find(params[:id])
     @activity.destroy
+    
     respond_to do |format|
       format.html { redirect_to activities_url, notice: 'Activity was successfully destroyed.' }
       format.json { head :no_content }
