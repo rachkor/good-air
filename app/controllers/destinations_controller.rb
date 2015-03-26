@@ -1,6 +1,7 @@
 class DestinationsController < ApplicationController
   before_action :set_destination, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :owns_destination, only: [:edit, :update, :destroy]
   # GET /destinations
   # GET /destinations.json
   def index
@@ -96,5 +97,12 @@ class DestinationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def destination_params
       params.require(:destination).permit(:name, :description, :city, :state, :country, :visited)
+    end
+
+    def owns_destination
+      if !user_signed_in? || current_user != Trip.find(params[:trip_id]).user
+        redirect_to trips_path, error: "That's not your trip!"
+      end
+
     end
 end

@@ -29,7 +29,7 @@
         <td><%= activity.cost %></td>
         <td><%= activity.date %></td>
         <td><%= link_to 'Show', destination_activity_path(activity.destination_id, activity) %></td>
-        <% if user_signed_in? && current_user == activity.destination.trip.user || current_user.admin? %> 
+        <% if user_signed_in? && current_user == activity.destination.trip.user || current_user.try(:admin?) %> 
           <td><%= link_to 'Edit', edit_destination_activity_path(activity.destination_id, activity) %></td>
           <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %> 
