@@ -1,38 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @destination.name %>
-</p>
+<div class="jumbotron">
+  <h1>Destination: <%= @destination.name %></h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @destination.description %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @destination.description %>
+  </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @destination.city %>
-</p>
+  <p>
+    <strong>City:</strong>
+    <%= @destination.city %>
+  </p>
 
-<p>
-  <strong>State:</strong>
-  <%= @destination.state %>
-</p>
+  <p>
+    <strong>State:</strong>
+    <%= @destination.state %>
+  </p>
 
-<p>
-  <strong>Country:</strong>
-  <%= @destination.country %>
-</p>
+  <p>
+    <strong>Country:</strong>
+    <%= @destination.country %>
+  </p>
 
-<p>
-  <strong>Visited?</strong>
-  <% if @destination.visited = false %>
-    Not yet!
-  <% elsif @destination.visited = true %>
-    Visited <%= @destination.trip.date %>
-  <% end %>
-</p>
+  <p>
+    <strong>Visited?</strong>
+    <% if @destination.visited = true %>
+      <%= @destination.trip.date %>
+    <% else %>
+      Not yet!      
+    <% end %>
+  </p>
+  <% if user_signed_in? && current_user == @destination.trip.user %> 
+    <%= link_to 'Edit Destination', edit_trip_destination_path(@trip, @destination) %> |
+    <%= link_to 'Back', trip_path(@trip) %>
+  <% end %> 
+</div>
 
 <table class="table table-hover">
   <tr>
@@ -53,13 +56,16 @@
       <td><%= activity.cost %></td>
       <td><%= activity.date %></td>
       <td><%= link_to 'Show', destination_activity_path(activity.destination_id, activity) %></td>
-      <td><%= link_to "edit", edit_destination_activity_path(activity.destination, activity) %></td>
+      <% if user_signed_in? && current_user == activity.destination.trip.user %> 
+        <td><%= link_to "edit", edit_destination_activity_path(activity.destination, activity) %></td>
+        <td><%= link_to "delete", destination_activity_path(activity.destination, activity), method: :delete, data: { confirm: 'Are you sure?'} %></td>
+      <% end %> 
   </tr>
   <% end %>
 </table>
 
-<button type="button" class="btn btn-default btn-block"><%= link_to 'Add Activity', new_destination_activity_path(@destination)%></button>
-
-<br>
-<%= link_to 'Edit', edit_trip_destination_path(@trip, @destination) %> |
-<%= link_to 'Back', trip_path(@trip) %>
+<% if user_signed_in? && current_user == @destination.trip.user %> 
+  <button type="button" class="btn btn-default btn-block"><%= link_to 'Add Activity', new_destination_activity_path(@destination)%></button>
+<% else %> 
+  <button type="button" class="btn btn-default btn-block"><%= link_to @destination.trip.name, trip_path(@destination.trip_id) %></button>
+<% end %>

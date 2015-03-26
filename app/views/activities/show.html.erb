@@ -1,29 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @activity.name %>
-</p>
+<div class="jumbotron">
+  <h1>Activity: <%= @activity.name %></h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @activity.description %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @activity.description %>
+  </p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @activity.location %>
-</p>
+  <p>
+    <strong>Location:</strong>
+    <%= @activity.location %>
+  </p>
 
-<p>
-  <strong>Cost:</strong>
-  <%= @activity.cost %>
-</p>
+  <p>
+    <strong>Cost:</strong>
+    <%= @activity.cost %>
+  </p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @activity.date %>
-</p>
+  <p>
+    <strong>Date:</strong>
+    <%= @activity.date %>
+  </p>
 
-<%= link_to 'Edit', edit_destination_activity_path(@activity.destination_id, @activity) %> |
-<%= link_to 'Back', trip_destination_path(@activity.destination.trip_id, @activity.destination_id) %>
+  <% if user_signed_in? && current_user == @activity.destination.trip.user %> 
+    <%= link_to 'Edit Activity', edit_destination_activity_path(@activity.destination_id, @activity) %>
+  <% end %> 
+</div>
+
+<button type="button" class="btn btn-default btn-block"><%= link_to @activity.destination.name, trip_destination_path(@activity.destination.trip_id, @activity.destination_id) %></button>

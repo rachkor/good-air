@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Destinations</h1>
+<div class="jumbotron"><h1>All Destinations</h1></div>
 
 
 <table class="table table-hover">
@@ -20,19 +20,21 @@
 <% @destinations.each do |destination| %>
   <tr>
     <td><%= destination.name %></td>
-    <td><%= link_to 'Trip', trip_path(destination.trip_id) %></td>
+    <td><%= link_to destination.trip.name, trip_path(destination.trip_id) %></td>
     <td><%= destination.description %></td>
     <td><%= destination.city %></td>
     <td><%= destination.state %></td>
     <td><%= destination.country %></td>
-    <td><% if destination.visited = false %>
-      Not yet!
-    <% elsif destination.visited = true %>
-      Visited
-    <% end %></td>
+    <% if destination.visited = true %>
+      <td><%= destination.trip.date %></td>
+    <% else %>
+      <td>Not yet!</td>
+    <% end %>
     <td><%= link_to 'Show', trip_destination_path(destination.trip_id, destination) %></td>
-    <td><%= link_to 'Edit', edit_trip_destination_path(destination.trip_id, destination) %></td>
-    <td><%= link_to 'Destroy', trip_destination_path(destination.trip_id, destination), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if user_signed_in? && current_user == destination.trip.user %> 
+      <td><%= link_to 'Edit', edit_trip_destination_path(destination.trip_id, destination) %></td>
+      <td><%= link_to 'Destroy', trip_destination_path(destination.trip_id, destination), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %> 
 
   </tr>
 <% end %>
@@ -40,4 +42,4 @@
 
 <br />
 
-<button type="button" class="btn btn-default btn-block"><%= link_to 'Add Destination', trips_path %></button>
+<button type="button" class="btn btn-default btn-block"><%= link_to 'New Trip', new_trip_path %></button>
