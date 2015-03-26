@@ -53,7 +53,8 @@
               <li><%=link_to "Log Out", destroy_user_session_path, method: :delete %></li>
             <% else %> 
               <li><%= link_to "Sign Up", new_user_registration_path %></li>
-              <li><%= link_to "Log In", new_user_session_path %></li>  
+              <li><%= link_to "Log In", new_user_session_path %></li>
+              <li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>  
             <% end %> 
             <li><%= link_to "Trips", trips_path  %></li>
             <li><%= link_to "Destinations", destinations_path  %></li>
