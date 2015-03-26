@@ -23,7 +23,7 @@
     <%= @activity.date %>
   </p>
 
-  <% if user_signed_in? && current_user == @activity.destination.trip.user %> 
+  <% if user_signed_in? && current_user == @activity.destination.trip.user || current_user.admin? %> 
     <%= link_to 'Edit Activity', edit_destination_activity_path(@activity.destination_id, @activity) %>
   <% end %> 
 </div>

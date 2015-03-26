@@ -31,7 +31,7 @@
       <td>Not yet!</td>
     <% end %>
     <td><%= link_to 'Show', trip_destination_path(destination.trip_id, destination) %></td>
-    <% if user_signed_in? && current_user == destination.trip.user %> 
+    <% if user_signed_in? && current_user == destination.trip.user || current_user.admin? %> 
       <td><%= link_to 'Edit', edit_trip_destination_path(destination.trip_id, destination) %></td>
       <td><%= link_to 'Destroy', trip_destination_path(destination.trip_id, destination), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %> 

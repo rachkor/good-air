@@ -15,7 +15,7 @@
     <%= @trip.date %>
   </p>
 
-  <% if user_signed_in? && current_user == @trip.user %>
+  <% if user_signed_in? && current_user == @trip.user || current_user.admin? %>
     <%= link_to 'Edit Trip', edit_trip_path(@trip) %> 
   <% end %> 
 </div>
